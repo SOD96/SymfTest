@@ -50,7 +50,13 @@ it would just leave letters behind
   - **Passes**
     - coalface, cacao elf
   - **Fails**
-    - coalface, 
+    - coalface, dark elf
 - Pangram
   - **Passes**
     - The quick brown fox jumps over the lazy dog
+  - **Fails**
+    - The British Broadcasting Corporation (BBC) is a British public service broadcaster
+
+# Future Changes
+- Update frontend so the script isn't so repeated
+- Add an option to allow anagrams of words that are under the necessary amount of characters

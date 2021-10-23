@@ -10,6 +10,9 @@ this will start the development server for Symfony and provide you with an IP an
 # Frontend
 Simply navigate to wherever the application has started, for me this was `http://127.0.0.1:38053/`
 
+You can enter in your first word in the checkbox to do a check on Palindromes and Pangrams. The second input box is only required for Anagrams.
+
+
 # API Request
 
 Will return back a JSON response of what has passed and failed our word checks  
@@ -25,9 +28,10 @@ Expected Response:
 
 ```
 {
-"palindrome_check": false,
-"anagram_check": false,
-"pangram_check": false,
-"submitted_word": "The British Broadcasting Corporation (BBC) is a British public service broadcaster."
+    "palindrome_check": false,
+    "anagram_check": true,
+    "pangram_check": false,
+    "submitted_word": "Coalface",
+    "compare_word": "cacao elf"
 }
 ```
