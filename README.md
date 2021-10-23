@@ -64,7 +64,26 @@ Upon removing the submitted_word field, the program would 500 error because if t
 to account for this not being there, and displayed a warning message to the user. The frontend application now also
 requires that field to be submitted.
 
+PHP Unit tests have been added, which can be run to check our checker.php helper file responds appropriately.
+
+This can be run using:
+`php ./vendor/bin/phpunit`
+
+The following response should be achieved
+
+```sean@DESKTOP-RS7A0M9:~/techtest/code$ php ./vendor/bin/phpunit
+PHPUnit 9.5.10 by Sebastian Bergmann and contributors.
+
+Testing
+.                                                                   1 / 1 (100%)
+
+Time: 00:00.065, Memory: 16.00 MB
+
+OK (1 test, 2 assertions)
+```
+
 # Future Changes
 - Update frontend so the script isn't so repeated
 - Add an option to allow anagrams of words that are under the necessary amount of characters
 - Could utilize Symfony entities and use the validation processes within this.
+- Add PHP Unit tests to do a full Application Test to our API end points
