@@ -19,6 +19,7 @@ class Checker
      */
     public function isPalindrome(string $word) : bool
     {
+        $word = strtolower(trim($word)); // Lowercase and remove any whitespace
         if($word == strrev($word)) {
             return true;
         }
@@ -73,6 +74,23 @@ class Checker
      */
     public function isPangram(string $phrase) : bool
     {
-        return false;
+        $alphabet = 'abcdefghijklmnopz';
+        $stringChars = count_chars($phrase);
+        $isPangram = false;
+        // Alphabet range is from 97-122
+
+        // Start at A which is 97, and work our way to Z which is 122
+        for ($i = 97; $i <= 122; $i++) {
+            if($stringChars[$i]) {
+                // Found the character, can mark as successful
+                $isPangram = true;
+            } else {
+                // One of the alphabet characters wasn't found, no point in continuing, break here.
+                $isPangram = false;
+                break;
+            }
+        }
+
+        return $isPangram;
     }
 }
