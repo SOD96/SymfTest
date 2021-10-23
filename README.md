@@ -36,6 +36,9 @@ ensure that words can't be taken, all letters need to be used once, so I'll ensu
 Still, it seems widely debated. I'm not sure if ALL letters should be used or just the ones present. I've kept my check in place, because if you have left over words 
 it would just leave letters behind
 
+Have decided for the sake of time to just have a simple bootstrap form and utilize JQuery / Ajax as that is what was 
+mentioned in the job spec
+
 # Testing
 
 - Palindrome
@@ -60,3 +63,4 @@ it would just leave letters behind
 # Future Changes
 - Update frontend so the script isn't so repeated
 - Add an option to allow anagrams of words that are under the necessary amount of characters
+- Could utilize Symfony entities and use the validation processes within this.

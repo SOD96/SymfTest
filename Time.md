@@ -11,3 +11,4 @@
 16:15 - spotted some inefficiencies that could be resolved in the API
 16:23 - Start on Frontend form
 18:28 - Frontend finished
+18:40 - Doing a few validation fixes on the API to avoid 500 errors

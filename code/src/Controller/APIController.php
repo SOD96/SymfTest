@@ -16,19 +16,32 @@ class APIController extends AbstractController
         // Get all the request data submitted by the client
         $request = Request::createFromGlobals();
 
+        // Check if our word has been submitted
+        if(!$request->request->has('submitted_word')) {
+            // Return a validation fail
+            return $this->json(['success' => false, 'message' => 'submitted_word field not present in post body data']);
+        }
+
         // Request->request will get POST data, request->query will get query data
         $submittedWord = $request->request->get('submitted_word');
         $comparisonWord = !empty($request->request->get('compare_word'))? $request->request->get('compare_word') : '';
 
-        // Send our submitted word to our checker
-        $isPalindrome = $checker->isPalindrome($submittedWord);
-        // We only need to check if it is an Anagram if the compare word is present, thus we'll wrap this in a check
-        if($comparisonWord == '') {
+        // Will never be an anagram if the words submitted are blank
+        if($comparisonWord == '' || $submittedWord == '') {
             $isAnagram = false;
         } else {
             $isAnagram = $checker->isAnagram($submittedWord, $comparisonWord);
         }
-        $isPangram = $checker->isPangram($submittedWord);
+
+        // Check our submitted word isn't blank
+        if($submittedWord != '') {
+            // Send our submitted word to our checker
+            $isPalindrome = $checker->isPalindrome($submittedWord);
+            $isPangram = $checker->isPangram($submittedWord);
+        } else {
+            $isPalindrome = false;
+            $isPangram = false;
+        }
 
         return $this->json([
             'palindrome_check' => $isPalindrome,
