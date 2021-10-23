@@ -1,1 +1,5 @@
 .idea
+code/vendor
+code/.env
+code/composer.lock
+code/symfony.lock
