@@ -2,12 +2,75 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}SymfTest{% endblock %}</title>
+        <title>SymfTest</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
 
     <body>
-<h1>
+<h1 class="text-center">
     {{  page_title }}
 </h1>
+
+    <div class="container">
+        <div class="col-md-4 offset-4">
+            <form id="word-checker-form">
+                <div class="form-group">
+                    <label for="submitted_word">Word to Check</label>
+                    <input type="text" class="form-control" id="submitted_word" name="submitted_word" aria-describedby="emailHelp" placeholder="Enter Word">
+                    <small id="submitted_word_help" class="form-text text-muted">
+                        This is the word we'll check Palindromes on
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="compare_word">Word to Compare Against</label>
+                    <input type="text" class="form-control" name="compare_word" id="compare_word" placeholder="Enter Second Word">
+                    <small id="compare_word_help" class="form-text text-muted">
+                        This is the word we'll check to see if any anagrams can be made up of the first word
+                    </small>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </br>
+        <div class="col-md-4 offset-4">
+            <div id="result-success-palindrome" style="display:none";>
+                <div id="palindrome_found" class="alert alert-primary" role="alert">
+                    Palindrome was found!
+                </div>
+            </div>
+            <div id="result-failure-palindrome" style="display:none";>
+                <div id="palindrome_found" class="alert alert-danger" role="alert">
+                    Palindrome was not found!
+                </div>
+            </div>
+        </div>
+    </div>
     </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("form").on("submit", function(event){
+                event.preventDefault();
+
+                var formValues= $(this).serialize();
+
+                $.post("/api/word", formValues, function(data){
+                    if(data.palindrome_check == true) {
+                        $("#result-success-palindrome").css('display', 'block');
+                        $("#result-failure-palindrome").css('display', 'none');
+                    } else {
+                        $("#result-failure-palindrome").css('display', 'block');
+                        $("#result-success-palindrome").css('display', 'none');
+                    }
+                    // Display the returned data in browser
+                    //$("#result").html(data);
+                });
+            });
+        });
+    </script>
 </html>
