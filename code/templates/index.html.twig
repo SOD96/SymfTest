@@ -35,14 +35,19 @@
         </div>
     </br>
         <div class="col-md-4 offset-4">
-            <div id="result-success-palindrome" style="display:none";>
-                <div id="palindrome_found" class="alert alert-primary" role="alert">
-                    Palindrome was found!
+            <div id="p-result-dynamic" style="display:none";>
+                <div id="palindrome_dynamic" class="alert alert-success" role="alert">
+                    <p id="palindrome_dynamic_text">Palindrome was found!</p>
                 </div>
             </div>
-            <div id="result-failure-palindrome" style="display:none";>
-                <div id="palindrome_found" class="alert alert-danger" role="alert">
-                    Palindrome was not found!
+            <div id="a-result-dynamic" style="display:none";>
+                <div id="anagram_dynamic" class="alert alert-success" role="alert">
+                    <p id="anagram_dynamic_text">Anagram was found!</p>
+                </div>
+            </div>
+            <div id="pa-result-dynamic" style="display:none";>
+                <div id="pangram_dynamic" class="alert alert-success" role="alert">
+                    <p id="pangram_dynamic_text">Pangram was found!</p>
                 </div>
             </div>
         </div>
@@ -60,15 +65,38 @@
                 var formValues= $(this).serialize();
 
                 $.post("/api/word", formValues, function(data){
-                    if(data.palindrome_check == true) {
-                        $("#result-success-palindrome").css('display', 'block');
-                        $("#result-failure-palindrome").css('display', 'none');
+                    // Show all the alerts
+                    $("#p-result-dynamic").css('display', 'block');
+                    $("#pa-result-dynamic").css('display', 'block');
+                    $("#a-result-dynamic").css('display', 'block');
+
+                    // Check Palindrome has came b ack
+                    if(data.palindrome_check === true) {
+                        $("#palindrome_dynamic").addClass('alert-success').removeClass('alert-danger');
+                        $("#palindrome_dynamic_text").text('Palindrome Was Found!');
                     } else {
-                        $("#result-failure-palindrome").css('display', 'block');
-                        $("#result-success-palindrome").css('display', 'none');
+                        $("#palindrome_dynamic").addClass('alert-danger').removeClass('alert-success');
+                        $("#palindrome_dynamic_text").text('Palindrome Was Not Found!');
                     }
-                    // Display the returned data in browser
-                    //$("#result").html(data);
+
+                    // Check Anagram has came back
+                    if(data.anagram_check === true) {
+                        $("#anagram_dynamic").addClass('alert-success').removeClass('alert-danger');
+                        $("#anagram_dynamic_text").text('Anagram Was Found!');
+                    } else {
+                        $("#anagram_dynamic").addClass('alert-danger').removeClass('alert-success');
+                        $("#anagram_dynamic_text").text('Anagram Was Not Found!');
+                    }
+
+                    // Check pangram has came back
+                    if(data.pangram_check === true) {
+                        $("#pangram_dynamic").addClass('alert-success').removeClass('alert-danger');
+                        $("#pangram_dynamic_text").text('Pangram Was Found!');
+                    } else {
+                        $("#pangram_dynamic").addClass('alert-danger').removeClass('alert-success');
+                        $("#pangram_dynamic_text").text('Pangram Was Not Found!');
+                    }
+
                 });
             });
         });
