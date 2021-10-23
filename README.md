@@ -60,6 +60,10 @@ mentioned in the job spec
   - **Fails**
     - The British Broadcasting Corporation (BBC) is a British public service broadcaster
 
+Upon removing the submitted_word field, the program would 500 error because if the field is not present, I've added in validation
+to account for this not being there, and displayed a warning message to the user. The frontend application now also
+requires that field to be submitted.
+
 # Future Changes
 - Update frontend so the script isn't so repeated
 - Add an option to allow anagrams of words that are under the necessary amount of characters

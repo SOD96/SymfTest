@@ -44,6 +44,7 @@ class APIController extends AbstractController
         }
 
         return $this->json([
+            'success' => true,
             'palindrome_check' => $isPalindrome,
             'anagram_check' => $isAnagram,
             'pangram_check' => $isPangram,
