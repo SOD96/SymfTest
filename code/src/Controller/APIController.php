@@ -22,7 +22,12 @@ class APIController extends AbstractController
 
         // Send our submitted word to our checker
         $isPalindrome = $checker->isPalindrome($submittedWord);
-        $isAnagram = $checker->isAnagram($submittedWord, $comparisonWord);
+        // We only need to check if it is an Anagram if the compare word is present, thus we'll wrap this in a check
+        if($comparisonWord == '') {
+            $isAnagram = false;
+        } else {
+            $isAnagram = $checker->isAnagram($submittedWord, $comparisonWord);
+        }
         $isPangram = $checker->isPangram($submittedWord);
 
         return $this->json([
