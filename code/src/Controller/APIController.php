@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Helpers\Checker;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,18 +11,19 @@ class APIController extends AbstractController
 {
     public function processWord(): Response
     {
-        $request = Request::createFromGlobals(); // Get all the request data submitted by the client
+        $checker = new Checker();
 
-        $submittedWord = $request->request->get('submitted_word'); // Request->request will get POST data, request->query will get query data
+        // Get all the request data submitted by the client
+        $request = Request::createFromGlobals();
 
-        // Check the word is a Palindrome
-        $isPalindrome = false;
+        // Request->request will get POST data, request->query will get query data
+        $submittedWord = $request->request->get('submitted_word');
+        $comparisonWord = !empty($request->request->get('compare_word'))? $request->request->get('compare_word') : '';
 
-        // Check the word is an Anagram
-        $isAnagram = false;
-
-        // Check the word is a Pangram
-        $isPangram = false;
+        // Send our submitted word to our checker
+        $isPalindrome = $checker->isPalindrome($submittedWord);
+        $isAnagram = $checker->isAnagram($submittedWord, $comparisonWord);
+        $isPangram = $checker->isPangram($submittedWord);
 
         return $this->json([
             'palindrome_check' => $isPalindrome,
@@ -31,4 +33,5 @@ class APIController extends AbstractController
         ]);
 
     }
+
 }
