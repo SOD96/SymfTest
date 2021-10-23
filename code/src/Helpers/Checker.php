@@ -74,10 +74,7 @@ class Checker
      */
     public function isPangram(string $phrase) : bool
     {
-        $alphabet = 'abcdefghijklmnopz';
         $stringChars = count_chars($phrase);
-        $isPangram = false;
-        // Alphabet range is from 97-122
 
         // Start at A which is 97, and work our way to Z which is 122
         for ($i = 97; $i <= 122; $i++) {
