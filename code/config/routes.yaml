@@ -2,6 +2,12 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+# Application Frontend Routes
 index:
   path: /
   controller: App\Controller\IndexController::showIndex
+
+# API Routes
+api-word:
+  path: /api/word
+  controller: App\Controller\APIController::processWord
