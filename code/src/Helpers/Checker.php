@@ -37,16 +37,16 @@ class Checker
      */
     public function isAnagram(string $word, string $comparison) : bool
     {
-        // Need to remove any white space, potential spaces, and just compare ASCII letters
-        $fixedWord = strlen(trim(str_replace(" ", "", $word)));
-        $fixedSecondWord = strlen(trim(str_replace(" ","", $comparison)));
+        // Need to remove any white space, potential spaces, and just compare letters
+        $fixedWord = strtolower(trim(str_replace(" ", "", $word)));
+        $fixedSecondWord = strtolower(trim(str_replace(" ","", $comparison)));
 
         // Check we have the same number of letters
-        if($fixedWord != $fixedSecondWord) {
+        if(strlen($fixedWord) != strlen($fixedSecondWord)) {
             return false;
         } else {
-            $asciiWord1 = count_chars(strtolower(str_replace(" ", "", $word)), 1);
-            $asciiWord2 = count_chars(strtolower(str_replace(" ", "", $comparison)), 1);
+            $asciiWord1 = count_chars($fixedWord, 1);
+            $asciiWord2 = count_chars($fixedSecondWord, 1);
 
             $arrayCheck = false;
 

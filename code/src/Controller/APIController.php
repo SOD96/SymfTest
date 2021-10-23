@@ -34,7 +34,8 @@ class APIController extends AbstractController
             'palindrome_check' => $isPalindrome,
             'anagram_check' => $isAnagram,
             'pangram_check' => $isPangram,
-            'submitted_word' => $submittedWord // Return the word to the client to sanity check
+            'submitted_word' => $submittedWord, // Return the word to the client to sanity check
+            'compare_word' => $comparisonWord // Return the word to the client to sanity check
         ]);
 
     }
